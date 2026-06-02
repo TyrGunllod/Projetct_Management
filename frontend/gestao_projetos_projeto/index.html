@@ -28,75 +28,73 @@
     </div>
   </div>
 
-  <div id="projeto-modal" class="modal-overlay hidden">
+  <div id="projeto-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display: none;">
     <div class="modal-card">
-      <div class="modal-header">
-        <h2 id="modal-title">Novo Projeto</h2>
-      </div>
-      <form id="projeto-form">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="input-nome">Nome do Projeto</label>
-            <input id="input-nome" type="text" required minlength="2" maxlength="200" placeholder="Digite o nome do projeto">
-          </div>
-
-          <div class="form-group">
-            <label for="input-descricao">Descricao</label>
-            <textarea id="input-descricao" rows="3" placeholder="Descreva o projeto"></textarea>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="input-data-inicio">Data de Inicio</label>
-              <input id="input-data-inicio" type="date" required>
-            </div>
-            <div class="form-group">
-              <label for="input-data-fim">Data de Termino</label>
-              <input id="input-data-fim" type="date" required>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="input-status">Status</label>
-              <select id="input-status">
-                <option value="planning">Planejamento</option>
-                <option value="active">Ativo</option>
-                <option value="completed">Concluido</option>
-                <option value="on-hold">Em Espera</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="input-gerente">Gerente</label>
-              <select id="input-gerente">
-                <option value="">Selecione</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Cor do Projeto</label>
-            <div id="color-palette" class="color-palette"></div>
-          </div>
+      <header class="modal-header flex justify-between">
+        <h3 id="modal-title">Novo Projeto</h3>
+        <button class="btn-icon" id="close-modal" aria-label="Fechar">&times;</button>
+      </header>
+      <form id="projeto-form" class="grid grid-md-2">
+        <div class="form-group">
+          <label for="input-nome">Nome do Projeto</label>
+          <input id="input-nome" type="text" required minlength="2" maxlength="200" placeholder="Digite o nome do projeto">
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline" id="btn-modal-cancelar">Cancelar</button>
-          <button type="submit" class="btn btn-primary" id="btn-modal-salvar">Criar Projeto</button>
+
+        <div class="form-group">
+          <label for="input-descricao">Descricao</label>
+          <textarea id="input-descricao" rows="3" placeholder="Descreva o projeto"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-data-inicio">Data de Inicio</label>
+          <input id="input-data-inicio" type="date" required>
+        </div>
+
+        <div class="form-group">
+          <label for="input-data-fim">Data de Termino</label>
+          <input id="input-data-fim" type="date" required>
+        </div>
+
+        <div class="form-group">
+          <label for="input-status">Status</label>
+          <select id="input-status">
+            <option value="planning">Planejamento</option>
+            <option value="active">Ativo</option>
+            <option value="completed">Concluido</option>
+            <option value="on-hold">Em Espera</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="input-gerente">Gerente</label>
+          <select id="input-gerente">
+            <option value="">Selecione</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Cor do Projeto</label>
+          <div id="color-palette" class="color-palette"></div>
         </div>
       </form>
+      <footer class="modal-footer flex justify-end gap-2">
+        <button type="button" class="btn" id="btn-modal-cancelar">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn-modal-salvar">Criar Projeto</button>
+      </footer>
     </div>
   </div>
 
-  <div id="confirm-dialog" class="modal-overlay hidden">
+  <div id="confirm-dialog" class="modal-overlay" role="dialog" aria-modal="true" style="display: none;">
     <div class="modal-card modal-card--sm">
-      <div class="modal-header">
-        <h2>Excluir projeto?</h2>
-      </div>
+      <header class="modal-header flex justify-between">
+        <h3>Excluir projeto?</h3>
+        <button class="btn-icon" id="btn-confirm-close" aria-label="Fechar">&times;</button>
+      </header>
       <p>Esta acao nao pode ser desfeita.</p>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline" id="btn-confirm-cancelar">Cancelar</button>
+      <footer class="modal-footer flex justify-end gap-2">
+        <button type="button" class="btn" id="btn-confirm-cancelar">Cancelar</button>
         <button type="button" class="btn btn-danger" id="btn-confirm-excluir">Excluir</button>
-      </div>
+      </footer>
     </div>
   </div>
 

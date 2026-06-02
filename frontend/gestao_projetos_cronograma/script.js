@@ -395,7 +395,7 @@
     if (progLabel) progLabel.textContent = (tarefa.progresso || 0) + '%';
     $('#tarefa-projeto-id').value = tarefa.projeto_id || '';
     $('#tarefa-responsavel-id').value = tarefa.responsavel_id || '';
-    $('#tarefa-modal').showModal();
+    $('#tarefa-modal').style.display = 'flex';
   }
 
   function abrirModalNova() {
@@ -412,11 +412,11 @@
     if (progLabel) progLabel.textContent = '0%';
     $('#tarefa-projeto-id').value = '';
     $('#tarefa-responsavel-id').value = '';
-    $('#tarefa-modal').showModal();
+    $('#tarefa-modal').style.display = 'flex';
   }
 
   function fecharModal() {
-    $('#tarefa-modal').close();
+    $('#tarefa-modal').style.display = 'none';
     editingTaskId = null;
   }
 
@@ -479,8 +479,10 @@
     $('#filtro-projeto').addEventListener('change', carregarTarefasGantt);
     $('#modal-close').addEventListener('click', fecharModal);
     $('#modal-cancel').addEventListener('click', fecharModal);
-    $('#tarefa-modal').addEventListener('close', fecharModal);
-    $('#tarefa-modal').addEventListener('submit', salvarTarefa);
+    $('#tarefa-modal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) fecharModal();
+    });
+    $('#modal-save').addEventListener('click', salvarTarefa);
     $('#tarefa-progresso').addEventListener('input', (e) => {
       const label = $('#progresso-label');
       if (label) label.textContent = e.target.value + '%';

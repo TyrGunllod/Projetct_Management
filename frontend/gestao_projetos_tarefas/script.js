@@ -199,11 +199,11 @@
     $('#field-prioridade').value = tarefa ? tarefa.prioridade : 'medium';
     $('#field-progresso').value = tarefa ? tarefa.progresso : 0;
     $('#progresso-value').textContent = tarefa ? tarefa.progresso : 0;
-    $('#modal-tarefa').classList.remove('hidden');
+    $('#modal-tarefa').style.display = 'flex';
   }
 
   function closeModal() {
-    $('#modal-tarefa').classList.add('hidden');
+    $('#modal-tarefa').style.display = 'none';
     editingTaskId = null;
   }
 
@@ -225,12 +225,12 @@
     currentTarefaId = tarefaId;
     const t = tarefas.find((t) => t.id === tarefaId);
     $('#drawer-tarefa-info').textContent = t ? t.titulo : '';
-    $('#drawer-registros').classList.remove('hidden');
+    $('#drawer-registros').style.display = 'flex';
     await carregarRegistros();
   }
 
   function closeDrawer() {
-    $('#drawer-registros').classList.add('hidden');
+    $('#drawer-registros').style.display = 'none';
     currentTarefaId = null;
     registros = [];
   }

@@ -189,7 +189,7 @@ function abrirModalCriacao() {
   renderColorPalette()
   document.getElementById('input-status').value = 'planning'
   document.getElementById('input-gerente').value = ''
-  document.getElementById('projeto-modal').classList.remove('hidden')
+  document.getElementById('projeto-modal').style.display = 'flex'
 }
 
 function abrirModalEdicao(projeto) {
@@ -204,11 +204,11 @@ function abrirModalEdicao(projeto) {
   document.getElementById('input-gerente').value = projeto.gerente_id || ''
   selectedColor = projeto.cor
   renderColorPalette()
-  document.getElementById('projeto-modal').classList.remove('hidden')
+  document.getElementById('projeto-modal').style.display = 'flex'
 }
 
 function fecharModal() {
-  document.getElementById('projeto-modal').classList.add('hidden')
+  document.getElementById('projeto-modal').style.display = 'none'
   editingId = null
 }
 
@@ -280,26 +280,32 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-empty-criar').addEventListener('click', abrirModalCriacao)
   document.getElementById('projeto-form').addEventListener('submit', handleSubmit)
   document.getElementById('btn-modal-cancelar').addEventListener('click', fecharModal)
+  document.getElementById('close-modal').addEventListener('click', fecharModal)
 
   document.getElementById('projeto-modal').addEventListener('click', (e) => {
     if (e.target === e.currentTarget) fecharModal()
   })
 
   document.getElementById('btn-confirm-cancelar').addEventListener('click', () => {
-    document.getElementById('confirm-dialog').classList.add('hidden')
+    document.getElementById('confirm-dialog').style.display = 'none'
+    projetoToDelete = null
+  })
+
+  document.getElementById('btn-confirm-close').addEventListener('click', () => {
+    document.getElementById('confirm-dialog').style.display = 'none'
     projetoToDelete = null
   })
 
   document.getElementById('btn-confirm-excluir').addEventListener('click', () => {
     if (projetoToDelete) {
       confirmarExclusao()
-      document.getElementById('confirm-dialog').classList.add('hidden')
+      document.getElementById('confirm-dialog').style.display = 'none'
     }
   })
 
   document.getElementById('confirm-dialog').addEventListener('click', (e) => {
     if (e.target === e.currentTarget) {
-      e.currentTarget.classList.add('hidden')
+      e.currentTarget.style.display = 'none'
       projetoToDelete = null
     }
   })
@@ -318,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (action === 'excluir') {
       projetoToDelete = id
-      document.getElementById('confirm-dialog').classList.remove('hidden')
+      document.getElementById('confirm-dialog').style.display = 'flex'
     }
   })
 })

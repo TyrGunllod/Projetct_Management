@@ -43,13 +43,13 @@
             <div class="card-body" id="workloadChart"></div>
         </div>
     </div>
-    <div class="modal-overlay hidden" id="modalAlocar">
-        <div class="modal">
-            <div class="modal-header">
-                <h2 id="modalTitle">Alocar Recurso</h2>
-                <button type="button" class="modal-close" id="btnModalClose">&times;</button>
-            </div>
-            <form id="formAlocar" class="grid">
+    <div class="modal-overlay" id="modalAlocar" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="display: none;">
+        <div class="modal-card">
+            <header class="modal-header flex justify-between">
+                <h3 id="modalTitle">Alocar Recurso</h3>
+                <button type="button" class="btn-icon" id="btnModalClose" aria-label="Fechar">&times;</button>
+            </header>
+            <form id="formAlocar" class="grid grid-md-2">
                 <div class="form-group">
                     <label for="userSelect">Usu&aacute;rio</label>
                     <select id="userSelect" required>
@@ -74,11 +74,11 @@
                     </div>
                     <input type="hidden" id="cor" value="#3b82f6" />
                 </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Alocar</button>
-                </div>
             </form>
+            <footer class="modal-footer flex justify-end gap-2">
+                <button type="button" class="btn" id="btnCancelar">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSalvar">Alocar</button>
+            </footer>
         </div>
     </div>
     <script src="../../shared/app.js"></script>
