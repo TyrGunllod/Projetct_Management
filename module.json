@@ -9,31 +9,31 @@
   "frontend_tabs": [
     {
       "name": "Dashboard",
-      "url": "modules/gestao_projetos/dashboard/index.html",
+      "url": "modules/dashboard/index.html",
       "menu_icone": "chart-bar",
       "order": 1
     },
     {
       "name": "Projetos",
-      "url": "modules/gestao_projetos/projeto/index.html",
+      "url": "modules/projeto/index.html",
       "menu_icone": "folder",
       "order": 2
     },
     {
       "name": "Tarefas",
-      "url": "modules/gestao_projetos/tarefas/index.html",
+      "url": "modules/tarefas/index.html",
       "menu_icone": "check-square",
       "order": 3
     },
     {
       "name": "Recursos",
-      "url": "modules/gestao_projetos/recursos/index.html",
+      "url": "modules/recursos/index.html",
       "menu_icone": "users",
       "order": 4
     },
     {
       "name": "Cronograma",
-      "url": "modules/gestao_projetos/cronograma/index.html",
+      "url": "modules/cronograma/index.html",
       "menu_icone": "calendar",
       "order": 5
     }

@@ -50,13 +50,20 @@ def copy_backend(dry_run: bool = False):
 
 
 def copy_frontend(dry_run: bool = False):
-    dest = GRINDX_FRONTEND / "modules" / "gestao_projetos"
+    dest_base = GRINDX_FRONTEND / "modules"
     if dry_run:
-        logger.info("[DRY-RUN] Copiaria %s -> %s", FRONTEND_SRC, dest)
+        logger.info("[DRY-RUN] Copiaria sub-modulos de %s -> %s", FRONTEND_SRC, dest_base)
     else:
-        if dest.exists(): shutil.rmtree(dest)
-        shutil.copytree(FRONTEND_SRC, dest)
-        logger.info("Frontend copiado")
+        for sub in FRONTEND_SRC.iterdir():
+            if sub.is_dir():
+                dest = dest_base / sub.name
+                if dest.exists(): shutil.rmtree(dest)
+                shutil.copytree(sub, dest)
+                logger.info("Frontend copiado: %s -> %s", sub.name, dest)
+            elif sub.is_file():
+                dest = dest_base / sub.name
+                shutil.copy2(sub, dest)
+                logger.info("Arquivo copiado: %s", sub.name)
 
 
 def copy_migration(dry_run: bool = False):

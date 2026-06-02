@@ -78,8 +78,8 @@
 }
 
 .badge--green {
-  background: color-mix(in srgb, #10b981 15%, transparent);
-  color: #10b981;
+  background: color-mix(in srgb, var(--success) 15%, transparent);
+  color: var(--success);
 }
 
 .badge--gray {
@@ -88,8 +88,8 @@
 }
 
 .badge--yellow {
-  background: color-mix(in srgb, #f59e0b 15%, transparent);
-  color: #f59e0b;
+  background: color-mix(in srgb, var(--warning) 15%, transparent);
+  color: var(--warning);
 }
 
 .projeto-card__descricao {

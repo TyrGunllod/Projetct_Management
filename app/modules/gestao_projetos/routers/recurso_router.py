@@ -1,28 +1,25 @@
 from fastapi import APIRouter, Depends, Query
 from shared.schemas.base import ErrorResponse, MessageResponse, PaginatedResponse
+from shared.security.permissions import Role
 
-from app.database import get_db
+from app.auth.dependencies import get_gestao_projetos_recurso_service, require_role
 from app.modules.gestao_projetos.schemas.recurso import RecursoCreate, RecursoResponse, RecursoUpdate
-from app.modules.gestao_projetos.repositories.recurso_repository import RecursoRepository
 from app.modules.gestao_projetos.services.recurso_service import RecursoService
 
 router = APIRouter(prefix="/v1/recursos", tags=["Recursos"])
-
-
-def _get_service(db=Depends(get_db)):
-    return RecursoService(RecursoRepository(db))
 
 
 @router.get(
     "",
     response_model=PaginatedResponse[RecursoResponse],
     summary="Listar",
+    dependencies=[Depends(require_role(Role.ADMIN, Role.OPERADOR, Role.LEITURA))],
 )
 def listar(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     projeto_id: int | None = Query(default=None),
-    service: RecursoService = Depends(_get_service),
+    service: RecursoService = Depends(get_gestao_projetos_recurso_service),
 ):
     return service.listar(page, page_size, projeto_id)
 
@@ -32,8 +29,9 @@ def listar(
     response_model=RecursoResponse,
     summary="Buscar por ID",
     responses={404: {"model": ErrorResponse}},
+    dependencies=[Depends(require_role(Role.ADMIN, Role.OPERADOR, Role.LEITURA))],
 )
-def buscar(id: int, service: RecursoService = Depends(_get_service)):
+def buscar(id: int, service: RecursoService = Depends(get_gestao_projetos_recurso_service)):
     return service.buscar(id)
 
 
@@ -43,8 +41,9 @@ def buscar(id: int, service: RecursoService = Depends(_get_service)):
     status_code=201,
     summary="Alocar recurso",
     responses={409: {"model": ErrorResponse}},
+    dependencies=[Depends(require_role(Role.ADMIN, Role.OPERADOR))],
 )
-def criar(dados: RecursoCreate, service: RecursoService = Depends(_get_service)):
+def criar(dados: RecursoCreate, service: RecursoService = Depends(get_gestao_projetos_recurso_service)):
     return service.criar(dados)
 
 
@@ -53,8 +52,9 @@ def criar(dados: RecursoCreate, service: RecursoService = Depends(_get_service))
     response_model=RecursoResponse,
     summary="Atualizar",
     responses={404: {"model": ErrorResponse}},
+    dependencies=[Depends(require_role(Role.ADMIN, Role.OPERADOR))],
 )
-def atualizar(id: int, dados: RecursoUpdate, service: RecursoService = Depends(_get_service)):
+def atualizar(id: int, dados: RecursoUpdate, service: RecursoService = Depends(get_gestao_projetos_recurso_service)):
     return service.atualizar(id, dados)
 
 
@@ -63,7 +63,8 @@ def atualizar(id: int, dados: RecursoUpdate, service: RecursoService = Depends(_
     response_model=MessageResponse,
     summary="Desalocar",
     responses={404: {"model": ErrorResponse}},
+    dependencies=[Depends(require_role(Role.ADMIN))],
 )
-def desalocar(id: int, service: RecursoService = Depends(_get_service)):
+def desalocar(id: int, service: RecursoService = Depends(get_gestao_projetos_recurso_service)):
     service.desalocar(id)
     return MessageResponse(message=f"Recurso {id} desalocado com sucesso.")
