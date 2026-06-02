@@ -1,0 +1,45 @@
+{
+  "module_name": "gestao_projetos",
+  "entity_name": "GestaoProjetos",
+  "version": "1.0.0",
+  "schema_name": "org",
+  "tables": ["projetos", "tarefas", "registros_tarefas", "recursos"],
+  "route_prefix": "/v1",
+  "route_tag": "Gestão de Projetos",
+  "frontend_tabs": [
+    {
+      "name": "Dashboard",
+      "url": "modules/gestao_projetos/dashboard/index.html",
+      "menu_icone": "chart-bar",
+      "order": 1
+    },
+    {
+      "name": "Projetos",
+      "url": "modules/gestao_projetos/projeto/index.html",
+      "menu_icone": "folder",
+      "order": 2
+    },
+    {
+      "name": "Tarefas",
+      "url": "modules/gestao_projetos/tarefas/index.html",
+      "menu_icone": "check-square",
+      "order": 3
+    },
+    {
+      "name": "Recursos",
+      "url": "modules/gestao_projetos/recursos/index.html",
+      "menu_icone": "users",
+      "order": 4
+    },
+    {
+      "name": "Cronograma",
+      "url": "modules/gestao_projetos/cronograma/index.html",
+      "menu_icone": "calendar",
+      "order": 5
+    }
+  ],
+  "menu_label": "Gestão de Projetos",
+  "menu_icone": "briefcase",
+  "role_minima": "operador",
+  "dependencies": ["iam"]
+}
